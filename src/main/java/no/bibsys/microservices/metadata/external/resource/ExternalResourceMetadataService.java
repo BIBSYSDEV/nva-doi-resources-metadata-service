@@ -9,14 +9,14 @@ import org.slf4j.LoggerFactory;
 import static spark.Spark.*;
 
 /**
- * This class implements /dlr-external-resource-metadata-service/v1
+ * This class implements /nva-doi-resource-metadata-service/v1
  */
 public class ExternalResourceMetadataService extends SparkJavaMicroServiceRest {
 
     private static final Logger logger = LoggerFactory.getLogger(ExternalResourceMetadataService.class);
 
     static {
-        api_path = "/dlr-external-resource-metadata-service/v1";
+        api_path = "/nva-doi-resource-metadata-service/v1";
         api_verbose = true;
     }
 
