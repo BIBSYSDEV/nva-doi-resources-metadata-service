@@ -31,8 +31,8 @@ public class ExternalResourceMetadataService extends SparkJavaMicroServiceRest {
         before(new MDC_api_filter(), new MDC_artifact_filter(), new MDC_request_filter(), new MDC_git_filter());
 
         path(api_path, () -> path("/metadata", () -> {
-            path("/dc", () -> get("/:url", new Route_GET_metadata_dc_url()));
             path("/doi", () -> get("/:url", new Route_GET_metadata_doi_url()));
+            path("/dc", () -> get("/:url", new Route_GET_metadata_dc_url()));
             path("/meta", () -> get("/:url", new Route_GET_metadata_meta_url()));
         }));
 

@@ -1,6 +1,7 @@
 package no.bibsys.microservices.metadata.external.resource;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import no.bibsys.dlr.microservices.sparkjava.common.Validate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,18 +18,18 @@ import static org.eclipse.jetty.http.MimeTypes.Type.APPLICATION_JSON;
 class Route_GET_metadata_meta_url implements Route {
 
     private static final Logger logger = LoggerFactory.getLogger(Route_GET_metadata_doi_url.class);
-    private MetadataExtractor metadataExtractor;
 
     @Override
     public Object handle(Request request, Response response) {
         String json = "";
         try {
-            metadataExtractor = new MetadataExtractor();
+            MetadataExtractor metadataExtractor = new MetadataExtractor();
             final String url = metadataExtractor.validUrl(validRouteParam(request, "url", 1024));
             final MetadataMap meta = metadataExtractor.meta(url);
 
             response.type(APPLICATION_JSON.asString());
-            json = new Gson().toJson(meta.getMap());
+            Gson gson = new GsonBuilder().setPrettyPrinting().create();
+            json = gson.toJson(meta.getMap());
         } catch (Validate.BadRequestParamException e) {
             logger.warn(e.getMessage(), e);
             response.status(BAD_REQUEST_400);

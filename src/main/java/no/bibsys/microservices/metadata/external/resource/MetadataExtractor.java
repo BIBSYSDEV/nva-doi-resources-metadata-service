@@ -1,6 +1,7 @@
 package no.bibsys.microservices.metadata.external.resource;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import no.bibsys.dlr.microservices.sparkjava.common.Validate;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
@@ -143,7 +144,8 @@ public class MetadataExtractor {
 
     private DoiMetadata getDoiMetadata(String doi) throws IOException {
         final String json = getDoiMetadata_json(doi);
-        return new Gson().fromJson(json, DoiMetadata.class);
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        return gson.fromJson(json, DoiMetadata.class);
     }
 
     String getDoiMetadata_json(String doi) throws IOException {

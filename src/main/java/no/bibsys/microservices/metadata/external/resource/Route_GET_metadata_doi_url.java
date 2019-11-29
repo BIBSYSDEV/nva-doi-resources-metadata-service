@@ -16,12 +16,13 @@ import static org.eclipse.jetty.http.MimeTypes.Type.APPLICATION_JSON;
 class Route_GET_metadata_doi_url implements Route {
 
     private static final Logger logger = LoggerFactory.getLogger(Route_GET_metadata_doi_url.class);
-    private MetadataExtractor metadataExtractor = new MetadataExtractor();
+
 
     @Override
     public Object handle(Request request, Response response) {
         String json = "";
         try {
+            MetadataExtractor metadataExtractor = new MetadataExtractor();
             final String url = metadataExtractor.validUrl(validRouteParam(request, "url", 1024));
             json = metadataExtractor.getDoiMetadata_json(url);
             response.type(APPLICATION_JSON.asString());
