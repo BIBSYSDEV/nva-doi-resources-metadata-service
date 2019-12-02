@@ -1,0 +1,36 @@
+apply plugin: 'java'
+
+group = 'no.unit.nva'
+version = '1.0-SNAPSHOT'
+
+description = """"""
+
+sourceCompatibility = 10
+targetCompatibility = 10
+tasks.withType(JavaCompile) {
+	options.encoding = 'UTF-8'
+}
+
+
+
+repositories {
+        
+     maven { url "http://artifactory.bibsys.no/artifactory/libs-snapshots" }
+     maven { url "http://artifactory.bibsys.no/artifactory/libs-releases" }
+     maven { url "https://repo.maven.apache.org/maven2" }
+}
+dependencies {
+    compile group: 'net.logstash.logback', name: 'logstash-logback-encoder', version:'5.3'
+    compile group: 'org.slf4j', name: 'slf4j-api', version:'1.7.29'
+    compile group: 'ch.qos.logback', name: 'logback-classic', version:'1.2.3'
+    compile group: 'org.slf4j', name: 'jcl-over-slf4j', version:'1.7.29'
+    compile group: 'com.sparkjava', name: 'spark-core', version:'2.9.1'
+    compile group: 'com.google.code.gson', name: 'gson', version:'2.8.6'
+    compile(group: 'no.bibsys.dlr', name: 'dlr-microservices-sparkjava-common', version:'1.0-SNAPSHOT') {
+        exclude(module: 'spark-core')
+        exclude(module: 'gson')
+    }
+    compile group: 'org.jsoup', name: 'jsoup', version:'1.12.1'
+    testCompile group: 'junit', name: 'junit', version:'4.12'
+    testCompile group: 'com.github.stefanbirkner', name: 'system-rules', version:'1.19.0'
+}
