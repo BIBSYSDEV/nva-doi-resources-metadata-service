@@ -1,4 +1,4 @@
-package no.bibsys.microservices.metadata.external.resource;
+package no.unit.microservices.metadata.external.resource;
 
 import org.hamcrest.CoreMatchers;
 import org.junit.After;
@@ -20,7 +20,7 @@ public class Route_GET_metadata_dc_url_Test {
 
     @Test
     public void testMetadataDcRoute_real_url() {
-        String doi_articles_3 = TestHelper.readTestResourceFile("/doi_article_3.txt");
+        String doi_articles_3 = TestHelper.readTestResourceFile("/doi_article_3.json");
         String testUrl = ExternalResourceMetadataService.getApi_Path() + "/metadata/dc/"
                 + URLEncoder.encode("http://doi.org/10.3886/E101441V1", StandardCharsets.UTF_8);
         String res = TestHelper.request(testUrl);

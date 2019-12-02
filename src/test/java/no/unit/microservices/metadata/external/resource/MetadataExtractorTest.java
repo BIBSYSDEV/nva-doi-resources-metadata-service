@@ -1,4 +1,4 @@
-package no.bibsys.microservices.metadata.external.resource;
+package no.unit.microservices.metadata.external.resource;
 
 import ch.qos.logback.classic.Level;
 import ch.qos.logback.classic.Logger;

@@ -1,4 +1,4 @@
-package no.bibsys.microservices.metadata.external.resource;
+package no.unit.microservices.metadata.external.resource;
 
 import no.bibsys.dlr.microservices.sparkjava.common.Route_env;
 import no.bibsys.dlr.microservices.sparkjava.common.Route_properties;

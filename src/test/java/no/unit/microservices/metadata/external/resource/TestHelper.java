@@ -1,4 +1,4 @@
-package no.bibsys.microservices.metadata.external.resource;
+package no.unit.microservices.metadata.external.resource;
 
 import spark.utils.IOUtils;
 

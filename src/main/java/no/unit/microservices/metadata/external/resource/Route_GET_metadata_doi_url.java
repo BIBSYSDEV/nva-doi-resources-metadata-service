@@ -1,7 +1,5 @@
-package no.bibsys.microservices.metadata.external.resource;
+package no.unit.microservices.metadata.external.resource;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import no.bibsys.dlr.microservices.sparkjava.common.Validate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,9 +13,10 @@ import static no.bibsys.dlr.microservices.sparkjava.common.Validate.validRoutePa
 import static org.eclipse.jetty.http.HttpStatus.*;
 import static org.eclipse.jetty.http.MimeTypes.Type.APPLICATION_JSON;
 
-class Route_GET_metadata_dc_url implements Route {
+class Route_GET_metadata_doi_url implements Route {
 
     private static final Logger logger = LoggerFactory.getLogger(Route_GET_metadata_doi_url.class);
+
 
     @Override
     public Object handle(Request request, Response response) {
@@ -25,13 +24,12 @@ class Route_GET_metadata_dc_url implements Route {
         try {
             MetadataExtractor metadataExtractor = new MetadataExtractor();
             final String url = metadataExtractor.validUrl(validRouteParam(request, "url", 1024));
-            final MetadataMap metadata = metadataExtractor.extract_metadata_from_resource_content(url);
+            json = metadataExtractor.getDoiMetadata_json(url);
             response.type(APPLICATION_JSON.asString());
-            Gson gson = new GsonBuilder().setPrettyPrinting().create();
-            json = gson.toJson(metadata.getMap());
         } catch (Validate.BadRequestParamException e) {
             logger.warn(e.getMessage(), e);
             response.status(BAD_REQUEST_400);
+            response.body(e.getLocalizedMessage());
             return e.getMessage();
         } catch (IOException e) {
             logger.error(e.getMessage(), e);
